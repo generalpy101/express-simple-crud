@@ -1,0 +1,18 @@
+version: '3.8'
+services:
+  mongodb:
+    image: mongo
+    restart: always
+    ports:
+      - 27017:27017
+    volumes:
+      - ./data:/data/db
+  express-server:
+    build: .
+    restart: always
+    environment:
+      - MONGO_URL=mongodb://mongodb:27017/user-db
+    ports:
+      - 3000:3000
+    depends_on:
+      - mongodb

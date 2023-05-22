@@ -6,6 +6,8 @@ const loginRouter = require("./routes/user_login");
 const registerRouter = require("./routes/user_registration");
 const profileRouter = require("./routes/user_get");
 
+const MONGO_URL = process.env.MONGO_URL || "mongodb://localhost:27017/userDB";
+
 const app = express();
 
 app.use(express.json());
@@ -16,7 +18,7 @@ app.use("/user", registerRouter);
 app.use("/user", profileRouter);
 
 mongoose
-  .connect("mongodb://localhost:27017/userDB", {
+  .connect(MONGO_URL, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
   })
